@@ -1,122 +1,206 @@
+
+// Authors: Benedikt Weihs, Tappeiner Thomas, Bänsch David
 #include "bstree.h"
+#include "assert.h"
+#include "limits.h"
 
-typedef struct bstree {
-	int number;
-	bstree *left, *right;
-} bstree;
+typedef struct bstree_node
+{
+    struct bstree_node * l;
+    struct bstree_node * r;
+    int value;
+} bstree_node;
 
-bstree* bstree_create() {
-	bstree* node = (bstree*)malloc(sizeof(bstree));
-	if(node == NULL) {
-		printf("Memory allocation failed.\n");
-		exit(EXIT_FAILURE);
-	}
-	return node;
+struct bstree
+{
+    size_t size;
+    bstree_node * groot;
+};
+
+bstree *
+bstree_create()
+{
+    bstree * tree = malloc( sizeof( bstree ) );
+    tree->size = 0;
+    tree->groot = NULL;
+    return tree;
 }
 
-void bstree_destroy(bstree* t) {
-	/*
-	 * Recursive implementation deletes all nodes
-	 * without child-notes first!
-	 */
-	if(t != NULL) {
-		bstree_destroy(t->left) bstree_destroy(t->right) free(t)
-	}
+// Returns the pointer to the hypothetical node
+static bstree_node **
+bstree_find_parent_node_ptr( const bstree * t, int d )
+{
+    bstree_node ** node = ( bstree_node ** ) &( t->groot );
+
+    if( !( *node ) )
+        return NULL;
+    while( ( *node )->value != d )
+    {
+        if( ( *node )->value > d )
+        {
+            if( !( ( *node )->l ) )
+                return node;
+
+            node = &( ( *node )->l );
+        }
+        else
+        {
+            if( !( ( *node )->r ) )
+                return node;
+
+            node = &( ( *node )->r );
+        }
+    }
+    return node;
 }
 
-void bstree_insert(bstree* t, int d) {
-	/*
-	 * will do nothing if d is already in t
-	 * definition of bstree implies that d cannot
-	 * be in t twice
-	 */
-	if(t != NULL) {
-		if(t->number > d) bstree_insert(t->left, d);
-		if(t->number < d) bstree_insert(t->right, d);
-	} else {
-		t = bstree_create();
-		t->number = d;
-	}
+static bstree_node **
+bstree_find_node_ptr( const bstree * t, int d )
+{
+    bstree_node ** parent = bstree_find_parent_node_ptr( t, d );
+    if( !parent )
+        return NULL;
+    if( ( *parent )->value > d )
+        return &( *parent )->l;
+    if( ( *parent )->value < d )
+        return &( *parent )->r;
+    return parent;
 }
 
-void bstree_remove(bstree* t, int d) {
-	// first find d in t
-	if(t == NULL) return;
-	if(t->number < d)
-		bstree_remove(t->right, d);
-	else if(t->number > d)
-		bstree_remove(t->left, d);
-	// d is found in tree
-	else {
-		// no further branching
-		if(t->right == NULL && t->left == NULL) free(t);
-		// only one branch
-		else if(t->left == NULL) {
-			bstree* help = t;
-			t = t->right;
-			free(help) return
-		}
-		// only one branch
-		else if(t->right == NULL) {
-			bstree* help = t;
-			t = t->left;
-			free(help) return
-		}
-		// two further branches
-		else {
-			bstree* help = t->right;
-			/*
-			 * at the point where the to be deleted node is
-			 * there must be a new node
-			 * for this new node to be valid it must be smaller than
-			 * every node to the right of t. we find that by always going left
-			 */
-			while(help != NULL && help->left != NULL)
-				help = help->left;
-			t->number = help->number;
-			/*
-			 * now there are two entries with number d in tree. delete the deepest node
-			 * with only one child
-			 */
-			bstree_remove(t->right, d);
-		}
-	}
+void
+bstree_insert( bstree * t, int d )
+{
+    bstree_node ** node = NULL;
+    if( t->groot )
+    {
+        node = bstree_find_node_ptr( t, d );
+        if( *node )
+            return;
+    }
+    else
+    {
+        node = &( t->groot );
+    }
+    *node = malloc( sizeof( bstree_node ) );
+    ( *node )->l = ( *node )->r = NULL;
+    ( *node )->value = d;
+    t->size++;
 }
 
-int bstree_minimum(const bstree* t) {
-	// could also be done recursively
-	while(t != NULL && t->left != NULL)
-		t = t->left;
-	return t->number;
+void
+bstree_remove( bstree * t, int d )
+{
+    bstree_node ** parent = NULL;
+
+    if( d == t->groot->value )
+    {
+        parent = &( t->groot );
+    }
+    else
+    {
+        parent = bstree_find_parent_node_ptr( t, d );
+    }
+
+    if( !parent || !( *parent ) )
+        return;
+
+    bstree_node * node_to_rm = *parent;
+
+    // Was the element in the tree?
+    if( node_to_rm->value != d )
+        return;
+
+    if( !( node_to_rm->l ) )
+    {
+        *parent = node_to_rm->r;
+        goto free;
+    }
+
+    // find node to replace node_to_rm with:
+    bstree_node * candidate = node_to_rm->l;
+    while( candidate->r )
+        candidate = candidate->r;
+    bstree_node ** papa_candidate =
+        bstree_find_parent_node_ptr( t, candidate->value );
+    *papa_candidate = candidate->l;
+
+    *parent = candidate;
+    candidate->l = node_to_rm->l;
+    candidate->r = node_to_rm->r;
+
+free:
+    free( node_to_rm );
+    t->size--;
 }
 
-int bstree_maximum(const bstree* t) {
-	// could also be done recursively
-	while(t != NULL && t->right != NULL)
-		t = t->right;
-	return t->number;
+int
+bstree_minimum( const bstree * t )
+{
+    bstree_node ** node = bstree_find_parent_node_ptr( t, INT_MIN );
+    if( !node || !( *node ) )
+        return 0;
+    return ( *node )->value;
 }
 
-bool bstree_contains(const bstree* t, int d) {
-	if(t->number == d) return True;
-	if(t->number > d && t->left == NULL) return False;
-	if(t->number < d && t->right == NULL) return False;
-	if(t->number > d) return bstree_contains(t->left, d);
-	if(t->number < d) return bstree_contains(t->right, d);
+int
+bstree_maximum( const bstree * t )
+{
+    const bstree_node * n = t->groot;
+    while( n->r )
+        n = n->r;
+    return n->value;
 }
 
-size_t bstree_size(const bstree* t) {
-	if(t->right == NULL && t->left == NULL)
-		return 1 else if(t->right == NULL) return 1 + bstree_size(t->left);
-	else if(t->left == NULL)
-		return 1 + bstree_size(t->right);
-	else
-		return 1 + bstree_size(t->right) + bstree_size(t->left);
+void
+bstree_destroy( bstree * t )
+{
+    bstree_node * node;
+    while( node = t->groot, node )
+    {
+        bstree_remove( t, node->value );
+    }
 }
 
-int main(void) {
-
-	return EXIT_SUCCESS;
+bool
+bstree_contains( const bstree * t, int d )
+{
+    bstree_node ** node = bstree_find_node_ptr( t, d );
+    if( !node || !( *node ) )
+        return false;
+    return ( *node )->value == d;
 }
 
-// TODO: Implement
+size_t
+bstree_size( const bstree * t )
+{
+    return t->size;
+}
+
+void
+bstree_print_nodes( const bstree_node * t, FILE * out )
+{
+    fprintf( out, "(" );
+    if( t->l )
+    {
+        bstree_print_nodes( t->l, out );
+        fprintf( out, ", " );
+    }
+    fprintf( out, "%i", t->value );
+    if( t->r )
+    {
+        fprintf( out, ", " );
+        bstree_print_nodes( t->r, out );
+    }
+    fprintf( out, ")" );
+}
+
+void
+bstree_print( const bstree * t, FILE * out )
+{
+    if( t->groot )
+        bstree_print_nodes( t->groot, out );
+    else
+        fprintf( out, "( NIL )" );
+    fprintf( out, " : %zu\n", t->size );
+}
+
