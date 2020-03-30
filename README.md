@@ -21,6 +21,7 @@ previous day (Tuesdays).
 | 2020-03-11 | -               |                    | Introduction to UNIX, shell scripting       |
 | 2020-03-18 | [1](exercise01) | Shell scripting    |                                             |
 | 2020-03-25 | [2](exercise02) | Processes, signals | [Self-assessment](self_assessment_test) due |
+| 2020-04-01 | [3](exercise03) | Scheduling (P&P)   |                                             |
 
 ## General Information
 
@@ -67,6 +68,9 @@ your code, try to avoid trivial comments such as `fopen(...); // open file`.
 Finally, all submitted code must be accompanied by a GNU Makefile. That
 is, your solution must be able to be compiled with a single call to `make`.
 You can find an example Makefile and more information [here](example_makefile).
+
+For some more specific topics such as proper error handling, check out our
+[Frequently Asked Questions (FAQ)](FAQ.md).
 
 ## Grading
 
