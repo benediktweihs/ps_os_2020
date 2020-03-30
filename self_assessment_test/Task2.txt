@@ -1,0 +1,37 @@
+#Written by David Bänsch, Benedikt Weihs, Thomas Tappeiner 
+1) When would you use a sorted binary tree over a linked list?
+When a sorted data structure is needed for example. Sorting a linked list is O(n^2) while the tree is automatically sorted 
+on each insert and find maximum can be called repeatedly to get a sorted list out of the tree. This is faster as insert and find max both are O(log n) if the tree is nearly balanced.
+Thus the total timecomplexity used would be O(nlogn). Other examples are mathematical structures that require tree like structures.
+
+2)The int value in each node can be changed to a pointer pointing to used data.
+
+3)Compilation is faster due to the increased number of compilation units. It is better understandable and easier to correct as is is easier to find certain functions. Modules can be reused for different programs and do not have to be rewritten. 
+
+4)Yes as compilation is faster (see 3) also changing out a single module is faster. It is also a big advantage when multiple people work on a single project as they can work on different files at the same time instead of working on a single file. 
+
+5)A header guard prevents the inclusion of the same header file multiple times is used #ifndef to check if the header has not been defined yet
+
+6)Encapsulation: the user should not have the option to change the basic structure of a binary tree when using the module, but only be allowed to interact with it by the given functions.
+
+7)-15)
+Const means that we do not change the variable inside of the function. Also this way the user knows that the variable is not being changed (by looking at the function prototype).
+
+Memory leaks occur when memory has been allocated and doesn't get freed. We don't need to free memory if we do not allocate it, but dynamical malloc can yield performance improvements.
+
+Code in general must be as portable as possible. This includes that comments should be able to be read by as many people as possible (therefore english comments). Writing everything in english increases continuity in a project.
+
+To limit the scope of the function and as a consequence improve security. This function is only visible to the local translation unit. Also we can reuse the same function names across different files.
+
+Yes comments are always needed. Making code readable for human is one of the most important things in programming. Comments are only supposed to state things that are not apparent by just looking at the code. Self-documenting code is code that does not require free-text comments to be understood by an experienced programer
+
+First the function of the module should not only fullfill what its made for. This includes printing something to stdout only in the case of bstree_print. Second it degrades performance.
+
+We should use it becuase it prints error information to the standard error file. If we are not
+shure wether the code works using "assert" makes debugging easier.
+
+Make executes the same compile command every time. Errors are less likely. Also saves time.
+
+Basically very well implemented.
+
+
