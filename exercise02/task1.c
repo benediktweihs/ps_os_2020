@@ -1,42 +1,52 @@
+// Written by David Bänsch, Benedikt Weihs, Thomas Tappeiner as all tasks in
+// this folder were
+
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/types.h>
-#include <unistd.h>
-#include <sys/wait.h>
+#include <sys/types.h> // fork
+#include <unistd.h>    // sleep, getpid
+#include <sys/wait.h>  // wait
 
-/*
- * comments: order of prints is not always the same
- * it depends on how much processing time each child gets.
- * it can not be predicted.
- */
+unsigned
+fib( unsigned n )
+{
+    if( n <= 1 )
+        return n;
+    return fib( n - 1 ) + fib( n - 2 );
+}
 
-unsigned fib(unsigned);
+void
+child( int child_number )
+{
+    const unsigned fib_result = fib( 40 );
+    printf( "Child %2i PID = %5i. Fib(40) = %u\n",
+            child_number,
+            getpid(),
+            fib_result );
+}
 
-int main(int argc, char* argv[]){
-
-    // make sure the input paramters are right
-    if(argc!=2){
-        printf("One input parameter needed.\n");
-        return EXIT_FAILURE;
+int
+main( int argc, char * argv[] )
+{
+    if( argc != 2 )
+    {
+        printf( "Usage: %s number_of_children\n", argv[ 0 ] );
+        return 1;
     }
-    int N = atoi(argv[1]);
-    if(N <= 0) return EXIT_FAILURE;
 
-    // create N child porcesses
-    for(int i = 0; i<N; i++){
-        if(fork()==0){
-            printf("Child %d PID = %d. Fib(40) = %u\n", i, getpid(), fib(40));
-			return EXIT_SUCCESS;
+    for( int i = 0; i < atoi( argv[ 1 ] ); i++ )
+    {
+        int pid_res = fork();
+
+        if( !pid_res )
+        {
+            child( i + 1 );
+            return 0;
         }
     }
 
-    // Wait for child processes
-    for(int i = 0; i<N; i++) wait(NULL);
-
-	return EXIT_SUCCESS;
+    for( int i = 0; i < ( *argv )[ 1 ]; i++ )
+        wait( NULL );
+    return 0;
 }
 
-unsigned fib(unsigned n) {
-    if(n <= 1) return n;
-    return fib(n - 1) + fib(n - 2);
-}

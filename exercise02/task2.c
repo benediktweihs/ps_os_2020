@@ -1,34 +1,58 @@
+#define _POSIX_SOURCE
+#include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
-#include <sys/types.h>
-#include <unistd.h>
+#include <sys/types.h> // fork
+#include <unistd.h>    // sleep, getpid
+#include <sys/wait.h>  // wait
 #include <signal.h>
-#include <string.h>
 
-#define TIME 5
+int no_sig = 1;
 
-bool resume = false;
-
-// when child sends signal to parent:
-void handler(){
-    resume = true;
+void
+child()
+{
+    printf( "Child %5i sleeping for 5 seconds...\n", getpid() );
+    sleep( 5 );
+    printf( "Child done\n" );
+    kill( getppid(), SIGUSR1 );
 }
 
-int main(void){
-    struct sigaction act;
-    memset( &act, '\0', sizeof( struct sigaction ) );
-    act.sa_handler = handler;
+void
+handler( int sig )
+{
+    if( sig == SIGUSR1 )
+    {
+        no_sig = 0;
+        printf( "Parent done\n" );
+    }
+}
 
-    if(fork()==0){
-        printf("Child %d sleeping for 5 secondqs...\n", getpid());
-        sleep(TIME);
-        printf("Child done\n");
-        kill( getppid(), SIGUSR1 ); // send signal to parent
-		return EXIT_SUCCESS;
+int
+main( int argc, char * argv[] )
+{
+    struct sigaction act;
+    memset( &act, 0, sizeof( struct sigaction ) );
+    act.sa_handler = handler;
+    sigaction( SIGUSR1, &act, NULL );
+
+    if( argc != 1 )
+    {
+        printf( "Usage: %s ", argv[ 0 ] );
+        return 1;
     }
 
-    while(!resume) sigaction( SIGUSR1, &act, NULL ); // resume only if child is done
-    printf("Parent done\n");
-    return EXIT_SUCCESS;
+    int pid_res = fork();
+
+    if( !pid_res )
+    {
+        child();
+        return 0;
+    }
+
+    while( no_sig )
+        ;
+
+    return 0;
 }
+
