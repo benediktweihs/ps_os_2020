@@ -4,19 +4,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h> // fork
-#include <unistd.h>    // sleep, getpid
 #include <sys/wait.h>  // wait
+#include <unistd.h>    // sleep, getpid
 
-unsigned
-fib( unsigned n )
-{
-    if( n <= 1 )
-        return n;
-    return fib( n - 1 ) + fib( n - 2 );
+// maaaan i like git
+
+unsigned fib(unsigned n) {
+	if(n <= 1) return n;
+	return fib(n - 1) + fib(n - 2);
 }
 
-void
-child( int child_number )
+void child( int child_number )
 {
     const unsigned fib_result = fib( 40 );
     printf( "Child %2i PID = %5i. Fib(40) = %u\n",
