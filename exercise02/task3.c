@@ -7,7 +7,7 @@
 #include <signal.h>
 #include <string.h>
 int child_SIGUSR2 = 0;
-int not_child_done = 1;
+volatile int not_child_done = 1;
 int sent_SIGURS2 = 0;
 int pid;
 

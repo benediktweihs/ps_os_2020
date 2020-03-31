@@ -7,8 +7,6 @@
 #include <sys/wait.h>  // wait
 #include <unistd.h>    // sleep, getpid
 
-// maaaan i like git
-
 unsigned fib(unsigned n) {
 	if(n <= 1) return n;
 	return fib(n - 1) + fib(n - 2);
