@@ -1,0 +1,21 @@
+1.	a race condition is a condition in a program where the output depends on timing of different
+	processes. If it is not wanted it is a bug. Since timing of processes is often uncontrollable
+	the outcome will be random
+
+2.	the producer consumer problem is a classic example. The result of the computation done by the
+	consumer depends on the producer being finished with filling the array (and also not to far
+	ahead). So (e.g.) in multi-threading, if there is no synchronisation race conditions can occur
+	if several threads use the same resource (shm).
+
+3.	No. task1_a can also yield correct results. But since timing is coincidental it can be wrong 
+	as well.
+
+4.	No. Could be coincidence. It tells us sth. about the likelihood of a result.
+
+5.	Making sure that different processes (threads) use the critical section of a shared resource
+	in a well defined order.
+
+6.	processes must updated continuously which process has used how much of the shared memory.
+	Updating a semaphore (adding/subtracting sth. to its value) is a simple way to do so.
+
+7.	no two semaphores are necessary.

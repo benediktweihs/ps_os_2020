@@ -1,0 +1,171 @@
+==4266== Memcheck, a memory error detector
+==4266== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==4266== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==4266== Command: ./task1_b
+==4266== Parent PID: 8430
+==4266== 
+--4266-- 
+--4266-- Valgrind options:
+--4266--    --leak-check=full
+--4266--    --show-leak-kinds=all
+--4266--    --track-origins=yes
+--4266--    --verbose
+--4266--    --log-file=valgrind-out.txt
+--4266-- Contents of /proc/version:
+--4266--   Linux version 5.3.0-46-lowlatency (buildd@lcy01-amd64-013) (gcc version 7.5.0 (Ubuntu 7.5.0-3ubuntu1~18.04)) #38~18.04.1-Ubuntu SMP PREEMPT Tue Mar 31 04:59:24 UTC 2020
+--4266-- 
+--4266-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-avx-avx2-bmi
+--4266-- Page sizes: currently 4096, max supported 4096
+--4266-- Valgrind library directory: /usr/lib/valgrind
+--4266-- Reading syms from /home/benedikt/CLionProjects/ps_os_2020/exercise05/task1_b
+--4266-- Reading syms from /lib/x86_64-linux-gnu/ld-2.27.so
+--4266--   Considering /lib/x86_64-linux-gnu/ld-2.27.so ..
+--4266--   .. CRC mismatch (computed 1b7c895e wanted 2943108a)
+--4266--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.27.so ..
+--4266--   .. CRC is valid
+--4266-- Reading syms from /usr/lib/valgrind/memcheck-amd64-linux
+--4266--   Considering /usr/lib/valgrind/memcheck-amd64-linux ..
+--4266--   .. CRC mismatch (computed 41ddb025 wanted 9972f546)
+--4266--    object doesn't have a symbol table
+--4266--    object doesn't have a dynamic symbol table
+--4266-- Scheduler: using generic scheduler lock implementation.
+--4266-- Reading suppressions file: /usr/lib/valgrind/default.supp
+==4266== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-4266-by-benedikt-on-???
+==4266== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-4266-by-benedikt-on-???
+==4266== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-4266-by-benedikt-on-???
+==4266== 
+==4266== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==4266== don't want to do, unless you know exactly what you're doing,
+==4266== or are doing some strange experiment):
+==4266==   /usr/lib/valgrind/../../bin/vgdb --pid=4266 ...command...
+==4266== 
+==4266== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==4266==   /path/to/gdb ./task1_b
+==4266== and then give GDB the following command
+==4266==   target remote | /usr/lib/valgrind/../../bin/vgdb --pid=4266
+==4266== --pid is optional if only one valgrind process is running
+==4266== 
+--4266-- REDIR: 0x401f2f0 (ld-linux-x86-64.so.2:strlen) redirected to 0x580608c1 (???)
+--4266-- REDIR: 0x401f0d0 (ld-linux-x86-64.so.2:index) redirected to 0x580608db (???)
+--4266-- Reading syms from /usr/lib/valgrind/vgpreload_core-amd64-linux.so
+--4266--   Considering /usr/lib/valgrind/vgpreload_core-amd64-linux.so ..
+--4266--   .. CRC mismatch (computed 50df1b30 wanted 4800a4cf)
+--4266--    object doesn't have a symbol table
+--4266-- Reading syms from /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so
+--4266--   Considering /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so ..
+--4266--   .. CRC mismatch (computed f893b962 wanted 95ee359e)
+--4266--    object doesn't have a symbol table
+==4266== WARNING: new redirection conflicts with existing -- ignoring it
+--4266--     old: 0x0401f2f0 (strlen              ) R-> (0000.0) 0x580608c1 ???
+--4266--     new: 0x0401f2f0 (strlen              ) R-> (2007.0) 0x04c32db0 strlen
+--4266-- REDIR: 0x401d360 (ld-linux-x86-64.so.2:strcmp) redirected to 0x4c33ee0 (strcmp)
+--4266-- REDIR: 0x401f830 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4c374f0 (mempcpy)
+--4266-- Reading syms from /lib/x86_64-linux-gnu/librt-2.27.so
+--4266--   Considering /lib/x86_64-linux-gnu/librt-2.27.so ..
+--4266--   .. CRC mismatch (computed 16979484 wanted f9e041e3)
+--4266--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/librt-2.27.so ..
+--4266--   .. CRC is valid
+--4266-- Reading syms from /lib/x86_64-linux-gnu/libc-2.27.so
+--4266--   Considering /lib/x86_64-linux-gnu/libc-2.27.so ..
+--4266--   .. CRC mismatch (computed b1c74187 wanted 042cc048)
+--4266--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.27.so ..
+--4266--   .. CRC is valid
+--4266-- Reading syms from /lib/x86_64-linux-gnu/libpthread-2.27.so
+--4266--   Considering /usr/lib/debug/.build-id/28/c6aade70b2d40d1f0f3d0a1a0cad1ab816448f.debug ..
+--4266--   .. build-id is valid
+--4266-- REDIR: 0x50e2c70 (libc.so.6:memmove) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--4266-- REDIR: 0x50e1d40 (libc.so.6:strncpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--4266-- REDIR: 0x50e2f50 (libc.so.6:strcasecmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--4266-- REDIR: 0x50e1790 (libc.so.6:strcat) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--4266-- REDIR: 0x50e1d70 (libc.so.6:rindex) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--4266-- REDIR: 0x50e47c0 (libc.so.6:rawmemchr) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--4266-- REDIR: 0x50e2de0 (libc.so.6:mempcpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--4266-- REDIR: 0x50e2c10 (libc.so.6:bcmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--4266-- REDIR: 0x50e1d00 (libc.so.6:strncmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--4266-- REDIR: 0x50e1800 (libc.so.6:strcmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--4266-- REDIR: 0x50e2d40 (libc.so.6:memset) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--4266-- REDIR: 0x51000f0 (libc.so.6:wcschr) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--4266-- REDIR: 0x50e1ca0 (libc.so.6:strnlen) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--4266-- REDIR: 0x50e1870 (libc.so.6:strcspn) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--4266-- REDIR: 0x50e2fa0 (libc.so.6:strncasecmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--4266-- REDIR: 0x50e1840 (libc.so.6:strcpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--4266-- REDIR: 0x50e30e0 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--4266-- REDIR: 0x50e1da0 (libc.so.6:strpbrk) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--4266-- REDIR: 0x50e17c0 (libc.so.6:index) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--4266-- REDIR: 0x50e1c70 (libc.so.6:strlen) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--4266-- REDIR: 0x50ec6c0 (libc.so.6:memrchr) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--4266-- REDIR: 0x50e2ff0 (libc.so.6:strcasecmp_l) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--4266-- REDIR: 0x50e2be0 (libc.so.6:memchr) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--4266-- REDIR: 0x5100eb0 (libc.so.6:wcslen) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--4266-- REDIR: 0x50e2050 (libc.so.6:strspn) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--4266-- REDIR: 0x50e2f20 (libc.so.6:stpncpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--4266-- REDIR: 0x50e2ef0 (libc.so.6:stpcpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--4266-- REDIR: 0x50e47f0 (libc.so.6:strchrnul) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--4266-- REDIR: 0x50e3040 (libc.so.6:strncasecmp_l) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--4266-- REDIR: 0x51d23c0 (libc.so.6:__strrchr_avx2) redirected to 0x4c32730 (rindex)
+--4266-- REDIR: 0x51d2590 (libc.so.6:__strlen_avx2) redirected to 0x4c32cf0 (strlen)
+--4266-- REDIR: 0x51d1fa0 (libc.so.6:__strchr_avx2) redirected to 0x4c32950 (index)
+--4266-- REDIR: 0x51d2ab0 (libc.so.6:__mempcpy_avx_unaligned_erms) redirected to 0x4c37130 (mempcpy)
+--4266-- REDIR: 0x51d2ad0 (libc.so.6:__memcpy_avx_unaligned_erms) redirected to 0x4c366e0 (memmove)
+--4267-- REDIR: 0x50db950 (libc.so.6:free) redirected to 0x4c30cd0 (free)
+--4268----4262-- REDIR: 0x50e2590 (libc.so.6:__GI_strstr) redirected to 0x4c37760 (__strstr_sse2)
+--4262-- REDIR: 0x50db950 (libc.so.6:free) redirected to 0x4c30cd0 (free)
+--4262-- REDIR: 0x51d21d0 (libc.so.6:__strchrnul_avx2) redirected to 0x4c37020 (strchrnul)
+==4262== 
+==4262== HEAP SUMMARY:
+==4262==     in use at exit: 0 bytes in 0 blocks
+==4262==   total heap usage: 2 allocs, 2 frees, 1,576 bytes allocated
+==4262== 
+==4262== All heap blocks were freed -- no leaks are possible
+==4262== 
+==4262== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==4262== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+ -- no leaks are possible
+==4268== 
+==4268== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==4268== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--4266-- REDIR: 0x50db070 (libc.so.6:malloc) redirected to 0x4c2faa0 (malloc)
+--4266-- REDIR: 0x50e2590 (libc.so.6:__GI_strstr) redirected to 0x4c37760 (__strstr_sse2)
+==4266== 
+==4266== Process terminating with default action of signal 13 (SIGPIPE)
+==4266==    at 0x5154154: write (write.c:27)
+==4266==    by 0x50CF1BC: _IO_file_write@@GLIBC_2.2.5 (fileops.c:1203)
+==4266==    by 0x50D0F50: new_do_write (fileops.c:457)
+==4266==    by 0x50D0F50: _IO_do_write@@GLIBC_2.2.5 (fileops.c:433)
+==4266==    by 0x50D030F: _IO_file_close_it@@GLIBC_2.2.5 (fileops.c:136)
+==4266==    by 0x50C2386: fclose@@GLIBC_2.2.5 (iofclose.c:53)
+==4266==    by 0x108C2A: killSHM (in /home/benedikt/CLionProjects/ps_os_2020/exercise05/task1_b)
+==4266==    by 0x108AA9: main (in /home/benedikt/CLionProjects/ps_os_2020/exercise05/task1_b)
+--4266-- REDIR: 0x50db950 (libc.so.6:free) redirected to 0x4c30cd0 (free)
+==4266== 
+==4266== HEAP SUMMARY:
+==4266==     in use at exit: 4,648 bytes in 2 blocks
+==4266==   total heap usage: 2 allocs, 0 frees, 4,648 bytes allocated
+==4266== 
+==4266== Searching for pointers to 2 not-freed blocks
+==4266== Checked 91,952 bytes
+==4266== 
+==4266== 552 bytes in 1 blocks are still reachable in loss record 1 of 2
+==4266==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4266==    by 0x50C2E49: __fopen_internal (iofopen.c:65)
+==4266==    by 0x50C2E49: fopen@@GLIBC_2.2.5 (iofopen.c:89)
+==4266==    by 0x108A72: main (in /home/benedikt/CLionProjects/ps_os_2020/exercise05/task1_b)
+==4266== 
+==4266== 4,096 bytes in 1 blocks are still reachable in loss record 2 of 2
+==4266==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4266==    by 0x50C218B: _IO_file_doallocate (filedoalloc.c:101)
+==4266==    by 0x50D2378: _IO_doallocbuf (genops.c:365)
+==4266==    by 0x50D1497: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+==4266==    by 0x50CF9EC: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+==4266==    by 0x50C3976: fwrite (iofwrite.c:39)
+==4266==    by 0x108A95: main (in /home/benedikt/CLionProjects/ps_os_2020/exercise05/task1_b)
+==4266== 
+==4266== LEAK SUMMARY:
+==4266==    definitely lost: 0 bytes in 0 blocks
+==4266==    indirectly lost: 0 bytes in 0 blocks
+==4266==      possibly lost: 0 bytes in 0 blocks
+==4266==    still reachable: 4,648 bytes in 2 blocks
+==4266==         suppressed: 0 bytes in 0 blocks
+==4266== 
+==4266== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==4266== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
