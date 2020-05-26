@@ -91,7 +91,7 @@ int main(void) {
 			throwExcept("Thread creation failed");
 		}
 
-		}
+	}
 	for(int j = 0; j < MAX / N; j++) {
         while(!myqueue_is_empty(&globalQ)){}
 		pthread_spin_lock(&lock);
