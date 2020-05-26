@@ -1,0 +1,23 @@
+cmake_minimum_required(VERSION 3.15)
+project(ps_os_2020 C)
+
+set(CMAKE_C11_STANDARD 14)
+set(CMAKE_USE_PTHREADS_INIT ON)
+find_package(Threads REQUIRED)
+
+set(TASK1 ../exercise07/task1.c ../exercise07/myqueue.h)
+set(TASK1ITER ../exercise07/task1_iter.c ../exercise07/myqueue.h)
+set(TASK2 ../exercise07/task2.c ../exercise07/myqueue.h)
+set(TASK3 ../exercise07/task3.c)
+set(TASK3_T ../exercise07/task3_atomic.c)
+
+add_executable(task1 ${TASK1})
+add_executable(task1Iter ${TASK1ITER})
+add_executable(task2 ${TASK2})
+add_executable(task3 ${TASK3})
+add_executable(task3_atomic ${TASK3_T})
+target_link_libraries(task1 Threads::Threads)
+target_link_libraries(task1Iter Threads::Threads)
+target_link_libraries(task2 Threads::Threads)
+target_link_libraries(task3 Threads::Threads)
+target_link_libraries(task3_atomic Threads::Threads)

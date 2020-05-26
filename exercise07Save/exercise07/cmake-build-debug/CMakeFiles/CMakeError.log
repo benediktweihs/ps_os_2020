@@ -1,0 +1,67 @@
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/benedikt/CLionProjects/ps_os_2020/exercise07/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_dc91e/fast && make[1]: Verzeichnis „/home/benedikt/CLionProjects/ps_os_2020/exercise07/cmake-build-debug/CMakeFiles/CMakeTmp“ wird betreten
+/usr/bin/make -f CMakeFiles/cmTC_dc91e.dir/build.make CMakeFiles/cmTC_dc91e.dir/build
+make[2]: Verzeichnis „/home/benedikt/CLionProjects/ps_os_2020/exercise07/cmake-build-debug/CMakeFiles/CMakeTmp“ wird betreten
+Building C object CMakeFiles/cmTC_dc91e.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_dc91e.dir/src.c.o   -c /home/benedikt/CLionProjects/ps_os_2020/exercise07/cmake-build-debug/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_dc91e
+/snap/clion/112/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_dc91e.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD    CMakeFiles/cmTC_dc91e.dir/src.c.o  -o cmTC_dc91e 
+CMakeFiles/cmTC_dc91e.dir/src.c.o: In Funktion »main«:
+src.c:(.text+0x3e): Warnung: undefinierter Verweis auf »pthread_create«
+src.c:(.text+0x4a): Warnung: undefinierter Verweis auf »pthread_detach«
+src.c:(.text+0x5b): Warnung: undefinierter Verweis auf »pthread_join«
+src.c:(.text+0x6f): Warnung: undefinierter Verweis auf »pthread_atfork«
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_dc91e.dir/build.make:86: recipe for target 'cmTC_dc91e' failed
+make[2]: *** [cmTC_dc91e] Error 1
+make[2]: Verzeichnis „/home/benedikt/CLionProjects/ps_os_2020/exercise07/cmake-build-debug/CMakeFiles/CMakeTmp“ wird verlassen
+Makefile:121: recipe for target 'cmTC_dc91e/fast' failed
+make[1]: *** [cmTC_dc91e/fast] Error 2
+make[1]: Verzeichnis „/home/benedikt/CLionProjects/ps_os_2020/exercise07/cmake-build-debug/CMakeFiles/CMakeTmp“ wird verlassen
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/benedikt/CLionProjects/ps_os_2020/exercise07/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_b36e7/fast && make[1]: Verzeichnis „/home/benedikt/CLionProjects/ps_os_2020/exercise07/cmake-build-debug/CMakeFiles/CMakeTmp“ wird betreten
+/usr/bin/make -f CMakeFiles/cmTC_b36e7.dir/build.make CMakeFiles/cmTC_b36e7.dir/build
+make[2]: Verzeichnis „/home/benedikt/CLionProjects/ps_os_2020/exercise07/cmake-build-debug/CMakeFiles/CMakeTmp“ wird betreten
+Building C object CMakeFiles/cmTC_b36e7.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_b36e7.dir/CheckFunctionExists.c.o   -c /snap/clion/112/bin/cmake/linux/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_b36e7
+/snap/clion/112/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b36e7.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_b36e7.dir/CheckFunctionExists.c.o  -o cmTC_b36e7  -lpthreads 
+/usr/bin/ld: -lpthreads kann nicht gefunden werden
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_b36e7.dir/build.make:86: recipe for target 'cmTC_b36e7' failed
+make[2]: *** [cmTC_b36e7] Error 1
+make[2]: Verzeichnis „/home/benedikt/CLionProjects/ps_os_2020/exercise07/cmake-build-debug/CMakeFiles/CMakeTmp“ wird verlassen
+Makefile:121: recipe for target 'cmTC_b36e7/fast' failed
+make[1]: *** [cmTC_b36e7/fast] Error 2
+make[1]: Verzeichnis „/home/benedikt/CLionProjects/ps_os_2020/exercise07/cmake-build-debug/CMakeFiles/CMakeTmp“ wird verlassen
+
+
+

@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/benedikt/CLionProjects/ps_os_2020/exercise07/task3.c
+fcntl.h
+-
+pthread.h
+-
+semaphore.h
+-
+stdbool.h
+-
+stdint.h
+-
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+sys/mman.h
+-
+sys/param.h
+-
+sys/stat.h
+-
+sys/types.h
+-
+sys/wait.h
+-
+time.h
+-
+unistd.h
+-
+

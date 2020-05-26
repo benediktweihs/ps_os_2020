@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/task1Iter.dir/task1_iter.c.o  -o task1Iter  -lpthread 

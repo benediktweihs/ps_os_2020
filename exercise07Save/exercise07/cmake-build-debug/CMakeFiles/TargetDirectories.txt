@@ -1,0 +1,7 @@
+/home/benedikt/CLionProjects/ps_os_2020/exercise07/cmake-build-debug/CMakeFiles/task3_atomic.dir
+/home/benedikt/CLionProjects/ps_os_2020/exercise07/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/benedikt/CLionProjects/ps_os_2020/exercise07/cmake-build-debug/CMakeFiles/task1.dir
+/home/benedikt/CLionProjects/ps_os_2020/exercise07/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/benedikt/CLionProjects/ps_os_2020/exercise07/cmake-build-debug/CMakeFiles/task1Iter.dir
+/home/benedikt/CLionProjects/ps_os_2020/exercise07/cmake-build-debug/CMakeFiles/task2.dir
+/home/benedikt/CLionProjects/ps_os_2020/exercise07/cmake-build-debug/CMakeFiles/task3.dir

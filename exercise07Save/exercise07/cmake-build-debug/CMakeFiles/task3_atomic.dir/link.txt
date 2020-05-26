@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/task3_atomic.dir/task3_atomic.c.o  -o task3_atomic  -lpthread 
